@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="318" height="211" viewBox="0 0 318 211">
+  <defs>
+    <filter id="Image_52" x="0" y="0" width="318" height="211" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_9769" data-name="Group 9769" transform="translate(-21 -298)">
+    <g id="Group_6080" data-name="Group 6080">
+      <g transform="matrix(1, 0, 0, 1, 21, 298)" filter="url(#Image_52)">
+        <g id="Image_52-2" data-name="Image 52" transform="translate(9 6)" fill="none" stroke="#707070" stroke-width="1" stroke-dasharray="5">
+          <rect width="300" height="193" rx="10" stroke="none"/>
+          <rect x="0.5" y="0.5" width="299" height="192" rx="9.5" fill="none"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
