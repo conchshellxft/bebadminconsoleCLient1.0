@@ -44,6 +44,28 @@ export default function UserProfileCard({
     // },
   ];
 
+  const accountSummaryRightContainerData: any[] = [
+    // {
+    //   key: "Number Of FPX Transactions",
+    //   value: userProfile?.reload_wallet?.count,
+    // },
+    // {
+    //   key: "Total Amount (RM) of Main Wallet Reloads",
+    //   value: truncate_str_view(userProfile?.reload_wallet?.total),
+    // },
+    // {
+    //   key: "Total Sales (RM)",
+    //   value: truncate_str_view(userProfile?.sales?.total),
+    // },
+    // {
+    //   key: "Total Donations (RM)",
+    //   value: truncate_str_view(userProfile?.donation?.total),
+    // },
+    // {
+    //   key: "Total Net Profit (RM)",
+    //   value: truncate_str(userProfile?.profit),
+    // },
+  ];
   // console.log(userProfile);
   const router = useRouter();
   return (
@@ -306,10 +328,10 @@ export default function UserProfileCard({
 
           {/* right container */}
           <div style={{ flexGrow: 1 }}>
-            {[].map((item) => {
+            {accountSummaryRightContainerData.map((item) => {
               return (
                 <div
-                  key={item!.key}
+                  key={item.key}
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
