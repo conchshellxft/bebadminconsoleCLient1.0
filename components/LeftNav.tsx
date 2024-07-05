@@ -25,9 +25,47 @@ import {
   
     return (
       <>
-        <ListItemButton
+      {["Projects/Products","Bookings","Leads","Contests","Notifications","Report & Analytics","Security"].includes(props.name)? 
+        //  <Link key={props.url} href={props.url}>
+         <a
+           href={props.url}
+           key={props.url}
+           style={{ textDecoration: "none" }}
+         >
+           <ListItemButton
+             id={props.name}
+             key={props.name}
+             autoFocus={props.name === props.redirectId}
+             sx={{ pl: 9 }}
+             // onClick={() =>
+             //   router.push(link.url, undefined, { shallow: true })
+             // }
+             style={{
+               backgroundColor: router.route.includes(props.url)
+                 ? "green"
+                 : "inherit",
+             }}
+           >
+             <ListItemText
+               primary={
+                 <span
+                   style={{
+                     color: router.route.includes(props.url)
+                       ? "#FFFFFF"
+                       : "#6C6C6C",
+                   }}
+                 >
+                   {props.name}
+                 </span>
+               }
+             />
+           </ListItemButton>
+         </a>
+        //  </Link>
+      
+      : <ListItemButton
           style={{ marginBottom: 0 }}
-          onClick={() => setOpen((open) => !open)}
+          onClick={["Projects/Products","Bookings","Leads","Contests","Notifications","Report & Analytics","Security"].includes(props.name)? undefined:() => setOpen((open) => !open)}
         >
           <ListItemIcon>
             {props.name === "Dashboard" && (
@@ -68,8 +106,8 @@ import {
               </span>
             }
           />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
+          {props.links.length===0? undefined: open ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>}
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {props.links.map((link: any) => {
@@ -90,7 +128,7 @@ import {
                     // }
                     style={{
                       backgroundColor: router.route.includes(link.url)
-                        ? "#FFA500"
+                        ? "green"
                         : "inherit",
                     }}
                   >

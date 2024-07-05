@@ -145,7 +145,7 @@ const TopNav = (props: any) => {
         <div style={{ display: "flex" }}>
           <Avatar
             sizes="small"
-            sx={{ bgcolor: "orange", width: 45, height: 45 }}
+            sx={{ bgcolor: "green", width: 45, height: 45 }}
           >
             SG
           </Avatar>

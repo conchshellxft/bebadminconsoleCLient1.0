@@ -127,12 +127,12 @@ export const ROUTES = [
     links: [
       {
         name: "BEB Members",
-        url: "/home-page/environment-variables",
+        url: "/user-management/user-list",
         apiIdentifier: "API_IIMMPACT",
       },
       {
         name: "Companies",
-        url: "/home-page/environment-variables",
+        url: "/user-management/company-list",
         apiIdentifier: "API_IIMMPACT",
       }
     ],
@@ -174,6 +174,7 @@ export const ROUTES = [
 {
   name: "Leads",
   icon: "",
+  url:"/user-management/leads",
   links: [
     
   
