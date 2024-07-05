@@ -9,7 +9,7 @@ export default function UserProfileCard({
   setShowAccountStatusCard,
   setUserId,
 }: any) {
-  const accountSummaryLeftContainerData = [
+  const accountSummaryLeftContainerData: any[] = [
     // {
     //   key: "User Id",
     //   value: userProfile?.user_id
@@ -44,28 +44,6 @@ export default function UserProfileCard({
     // },
   ];
 
-  const accountSummaryRightContainerData = [
-    // {
-    //   key: "Number Of FPX Transactions",
-    //   value: userProfile?.reload_wallet?.count,
-    // },
-    // {
-    //   key: "Total Amount (RM) of Main Wallet Reloads",
-    //   value: truncate_str_view(userProfile?.reload_wallet?.total),
-    // },
-    // {
-    //   key: "Total Sales (RM)",
-    //   value: truncate_str_view(userProfile?.sales?.total),
-    // },
-    // {
-    //   key: "Total Donations (RM)",
-    //   value: truncate_str_view(userProfile?.donation?.total),
-    // },
-    // {
-    //   key: "Total Net Profit (RM)",
-    //   value: truncate_str(userProfile?.profit),
-    // },
-  ];
   // console.log(userProfile);
   const router = useRouter();
   return (
