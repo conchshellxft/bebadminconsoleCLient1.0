@@ -253,11 +253,11 @@ export const ROUTES = [
     name: "Settings",
     icon: "",
     links: [
-      {
-        name: "Integrations",
-        url: "/settings/admin-files",
-        apiIdentifier: "API_IIMMPACT",
-      },
+      // {
+      //   name: "Integrations",
+      //   url: "/settings/admin-files",
+      //   apiIdentifier: "API_IIMMPACT",
+      // },
       {
         name: "Terms & Conditions",
         url: "/settings/terms-conditions",
