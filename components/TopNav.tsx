@@ -69,46 +69,60 @@ const TopNav = (props: any) => {
         display: "flex",
         justifyContent: "space-between",
         padding: "15px 15px 15px 0px",
-        color: "#707070",
+        backgroundColor: 'var(--cui-body-bg)', 
+        color: 'var(--cui-body-color)',        
+        borderColor: 'var(--cui-border-color)',
         height: DIMENSIONS.TOPNAV_HIEGHT,
-        background: "#FFFFFF 0% 0% no-repeat padding-box",
-        boxShadow: "0px 3px 15px #0000004D",
+        width: navOpen?'100%' :`calc(100vw-${DIMENSIONS.LEFTNAV_WIDTH})`,
+        // background: "#FFFFFF 0% 0% no-repeat padding-box",
+        boxShadow: "0px 0px 0px #0000004D",
         opacity: 1,
       }}
     >
-      <div style={{ display: "flex", columnGap: 20, alignItems: "center" }}>
-        <div
+               
+      <div style={{ display: "flex", columnGap: 5, alignItems: "center" ,color: 'var(--cui-body-color)',  }}>
+        {navOpen && <div
           style={{
             display: "flex",
             textAlign: "left",
-            padding: 16,
-            justifyContent: "space-between",
+            // padding: 16,
+            justifyContent: "center",
+        color: 'var(--cui-body-color)',        
+
             alignItems: "center",
-            backgroundColor: "#FAFBFD",
-            minWidth: `calc(${DIMENSIONS.LEFTNAV_WIDTH} - 1px)`,
+            backgroundColor:'inherit',
+            width: `calc(${DIMENSIONS.LEFTNAV_WIDTH})`,
             height: DIMENSIONS.TOPNAV_HIEGHT,
-            boxShadow: navOpen ? "0px 3px 15px #00000029" : "none",
+            paddingTop:"20px",
+            boxShadow: navOpen ? "0px 0px 0px #00000029" : "none",
           }}
         >
-          <Image src="/logo.png" alt="/logo.png" height={50} width={150} />
+          <Typography  height={50} width={150} variant="h6" sx={{ 
+            fontWeight:"bold",
+            
+           }} >Team BEB</Typography>
+         
+        </div>}
+        <div>
+
+          <Breadcrumbs aria-label="breadcrumb">
           <IconButton onClick={() => setNavOpen(!navOpen)} style={{}}>
             {navOpen ? (
-              <MenuOpenIcon sx={{ color: "#0051A0" }} />
+              <MenuOpenIcon sx={{  color: 'var(--cui-body-color)' }} />
             ) : (
-              <MenuIcon sx={{ color: "#0051A0" }} />
+              <MenuIcon sx={{  color: 'var(--cui-body-color)' }} />
             )}
-          </IconButton>
-        </div>
-        <div>
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link underline="none" color="inherit">
+          </IconButton>  
+
+
+            <Link underline="none" color= 'var(--cui-body-color)' >
               Admin
             </Link>
             {breadcrumb.map((item: any) => {
               return (
                 <Link
                   underline={item.url ? "hover" : "none"}
-                  color="inherit"
+                  color= 'var(--cui-body-color)'
                   // href={item.url}
                   style={item.url && { cursor: "pointer" }}
                   onClick={() => router.push(item.url)}
@@ -122,10 +136,10 @@ const TopNav = (props: any) => {
           </Breadcrumbs>
         </div>
       </div>
-      <div style={{ display: "flex", columnGap: 20, alignItems: "center" }}>
-        <Typography style={{ margin: 0 }}>
+      <div style={{ display: "flex", columnGap: 5, alignItems: "center" }}>
+        {/* <Typography style={{ margin: 0 }}>
           {format(currentTime, "HH:mm | E, d MMMM yyyy")}
-        </Typography>
+        </Typography> */}
         {/* <NotificationsIcon /> */}
         {/* <div> */}
         {/* <Image
@@ -142,20 +156,25 @@ const TopNav = (props: any) => {
         /> */}
         {/* </div> */}
         {/* <SmsIcon /> */}
-        <div style={{ display: "flex" }}>
-          <Avatar
-            sizes="small"
-            sx={{ bgcolor: "green", width: 45, height: 45 }}
-          >
-            SG
-          </Avatar>
-          <div 
+        <div 
             style={{ paddingTop: 10, paddingLeft: 10 }}>
           {(activationCount==0 && <NotificationsIcon/>)}
             {(activationCount!=0 && (<span><NotificationsActiveIcon/><sup>{activationCount}</sup>&nbsp;&nbsp;</span>))}
           </div>
+        <Avatar
+            sizes="small"
+            sx={{ bgcolor: "green", width: 35, height: 35 }}
+          >
+            SG
+          </Avatar>
+          
+        <div style={{ display: "flex",width:"25px" }}>
+        
+       
+         
+          
 
-          <div
+          {/* <div
             style={{ paddingTop: 10, paddingLeft: 10, cursor: "pointer" }}
             onClick={() => {
               router.push("/sign-in");
@@ -165,16 +184,16 @@ const TopNav = (props: any) => {
             <Tooltip title="Logout">
               <LogoutIcon />
             </Tooltip>
-          </div>
+          </div> */}
         </div>
-        <div>
+        {/* <div>
           <Typography style={{ fontWeight: "bold", margin: 0, color: "black" }}>
             {"Sekhar G"}
           </Typography>
           <span style={{ fontWeight: "lighter" }}>
             {"Root"}
           </span>
-        </div>
+        </div> */}
       </div>
     </Paper>
   );

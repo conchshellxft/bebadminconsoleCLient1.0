@@ -1,0 +1,11 @@
+:root {
+    --cui-body-color: rgba(255, 255, 255, .87);
+    --cui-body-bg: #212631;
+    --cui-emphasis-color: #fff;
+    --cui-secondary-color: rgba(255, 255, 255, .6);
+    --cui-secondary-bg: #323a49;
+    --cui-tertiary-color: rgba(255, 255, 255, .38);
+    --cui-tertiary-bg: #2a303d;
+    --cui-border-color: #323a49;
+  }
+  

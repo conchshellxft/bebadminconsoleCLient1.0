@@ -5,13 +5,14 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { css } from "@emotion/react";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-
+import "./drawer.css"
+import "./global.css"
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import MoonLoader from "react-spinners/MoonLoader";
 const override = css`
 border-color: #50C878;
-margin-left: 50%;
+margin-left: 0%;
 margin-top: 20%;
 z-index: 99;
 position: fixed;

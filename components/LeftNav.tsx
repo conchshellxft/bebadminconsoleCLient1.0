@@ -5,6 +5,7 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    Typography,
   } from "@mui/material";
   import { useContext, useEffect, useRef, useState } from "react";
   import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -18,7 +19,6 @@ import {
   import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
   import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
   import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
-  
   const NavListItem = (props: any) => {
     const [open, setOpen] = useState(true);
     const router = useRouter();
@@ -42,7 +42,7 @@ import {
              // }
              style={{
                backgroundColor: router.route.includes(props.url)
-                 ? "green"
+                 ?  'rgba(255, 255, 255, 0.2)'
                  : "inherit",
              }}
            >
@@ -51,8 +51,9 @@ import {
                  <span
                    style={{
                      color: router.route.includes(props.url)
-                       ? "#FFFFFF"
-                       : "#6C6C6C",
+                       ?            'var(--cui-body-color)'   
+
+                       : "white",
                    }}
                  >
                    {props.name}
@@ -69,23 +70,23 @@ import {
         >
           <ListItemIcon>
             {props.name === "Dashboard" && (
-              <AppsIcon style={{ color: "rgb(0, 0, 0, 0.15)" }} />
+              <AppsIcon style={{ color: "white" }} />
             )}
             {props.name === "Users" && (
               <ConnectWithoutContactOutlinedIcon
-                style={{ color: "rgb(0, 0, 0, 0.15)" }}
+                style={{ color: "white" }}
               />
             )}
             {props.name === "Settings" && (
-              <SettingsOutlinedIcon style={{ color: "rgb(0, 0, 0, 0.15)" }} />
+              <SettingsOutlinedIcon style={{ color:"white" }} />
             )}
             {props.name === "Finance" && (
               <AccountBalanceOutlinedIcon
-                style={{ color: "rgb(0, 0, 0, 0.15)" }}
+                style={{ color: "white"}}
               />
             )}
             {props.name === "Content" && (
-              <ContentPasteOutlinedIcon style={{ color: "rgb(0, 0, 0, 0.15)" }} />
+              <ContentPasteOutlinedIcon style={{ color: "white" }} />
             )}
             {props.icon && (
               <img src={props.icon} alt="icons" height={25} width={25} />
@@ -128,7 +129,7 @@ import {
                     // }
                     style={{
                       backgroundColor: router.route.includes(link.url)
-                        ? "green"
+                        ?  'rgba(255, 255, 255, 0.2)'
                         : "inherit",
                     }}
                   >
@@ -262,9 +263,12 @@ import {
           "& .MuiDrawer-paper": {
             width: DIMENSIONS.LEFTNAV_WIDTH,
             boxSizing: "border-box",
-            boxShadow: "0px 3px 15px #00000029",
+            boxShadow: "0px 0px 0px #00000029",
             display: "block",
             position: "relative",
+            backgroundColor: 'var(--cui-body-bg)', 
+            color: 'var(--cui-body-color)',        
+            borderColor: 'var(--cui-border-color)',
             // overflowY: "scroll",
             "::-webkit-scrollbar": {
               display: "none",
@@ -276,7 +280,8 @@ import {
         anchor="left"
         open={navOpen}
       >
-        <List>
+        
+        <List sx={{ justifyContent:"center" }}>
           {filteredRoutes.map((item: any) => {
             return (
               <NavListItem key={item.name} {...item} redirectId={redirectId} />

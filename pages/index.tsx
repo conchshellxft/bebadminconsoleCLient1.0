@@ -6,7 +6,7 @@ const Home : NextPage = () =>{
     const router  = useRouter();
     return (
 
-      <div style={{ height: "100vh" }}>
+      <div style={{ height: "100vh"  }}>
         
      
         <title>BEB Admin Console</title>
@@ -39,7 +39,7 @@ const Home : NextPage = () =>{
         <meta name="theme-color" content="#ffffff" />
      
 
-      <main>
+      <main style={{ margin:0 }}>
         <Overview/>
       </main>
 
