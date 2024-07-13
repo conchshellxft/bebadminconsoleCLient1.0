@@ -10,9 +10,11 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { format } from "date-fns";
-import { Button, Link } from "@mui/material";
+import { Button, ClickAwayListener, Divider, Grow, Link, Popper, Stack, Typography } from "@mui/material";
 import router from "next/router";
-
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
 const headCells = [
   {
     label: "Date & Time",
@@ -20,7 +22,7 @@ const headCells = [
   },
   {
     label: "User Id",
-    id: "user_id"
+    id: "user_id",
   },
   {
     label: "Name",
@@ -61,7 +63,11 @@ const headCells = [
   {
     label: "View Logs",
     id: "view_logs",
-  }
+  },
+  {
+    label: "Options",
+    id: "view_logs",
+  },
 ];
 
 const headCellsCompany = [
@@ -71,7 +77,7 @@ const headCellsCompany = [
   },
   {
     label: "Company Id",
-    id: "user_id"
+    id: "user_id",
   },
   {
     label: "Name",
@@ -108,31 +114,34 @@ const headCellsCompany = [
   {
     label: "View Logs",
     id: "view_logs",
-  }
+  },
 ];
 
-
 function EnhancedTableHead(props: any) {
-  const { order, setOrder, orderBy, setOrderBy,type } = props;
+  const { order, setOrder, orderBy, setOrderBy, type } = props;
   return (
     <TableHead>
-      <TableRow
-        style={{height:30}}>
-        {[... type==="Company"?headCellsCompany:headCells].map((headCell) => (
-          <TableCell style={{ backgroundColor: "#EFF5FB", whiteSpace:"nowrap"}} key={headCell.id}>
-            <TableSortLabel
-              disabled={["image", "action"].includes(headCell.id)}
-              active={orderBy ? orderBy === headCell.id : false}
-              direction={order === "ASC" ? "asc" : "desc"}
-              onClick={() => {
-                setOrder(order === "ASC" ? "DESC" : "ASC");
-                setOrderBy(headCell.id);
-              }}
+      <TableRow style={{ height: 30 }}>
+        {[...(type === "Company" ? headCellsCompany : headCells)].map(
+          (headCell) => (
+            <TableCell
+              style={{ backgroundColor: "#EFF5FB", whiteSpace: "nowrap" }}
+              key={headCell.id}
             >
-              {headCell.label}
-            </TableSortLabel>
-          </TableCell>
-        ))}
+              <TableSortLabel
+                disabled={["image", "action"].includes(headCell.id)}
+                active={orderBy ? orderBy === headCell.id : false}
+                direction={order === "ASC" ? "asc" : "desc"}
+                onClick={() => {
+                  setOrder(order === "ASC" ? "DESC" : "ASC");
+                  setOrderBy(headCell.id);
+                }}
+              >
+                {headCell.label}
+              </TableSortLabel>
+            </TableCell>
+          )
+        )}
       </TableRow>
     </TableHead>
   );
@@ -149,7 +158,7 @@ export default function UserListTable({
   setOrder,
   orderBy,
   setOrderBy,
-  type
+  type,
 }: any) {
   const rows: any[] = data;
 
@@ -167,8 +176,42 @@ export default function UserListTable({
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
 
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
 
+  const handleClose = (event: Event | React.SyntheticEvent) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -176,7 +219,7 @@ export default function UserListTable({
         <TableContainer sx={{ maxHeight: 1100 }}>
           <Table aria-labelledby="tableTitle" size={"medium"} stickyHeader>
             <EnhancedTableHead
-              {...{ order, setOrder, orderBy, setOrderBy,type }}
+              {...{ order, setOrder, orderBy, setOrderBy, type }}
               rowCount={rows?.length}
             />
             <TableBody sx={{ width: "100%" }}>
@@ -192,17 +235,22 @@ export default function UserListTable({
                       height: 30,
                     }}
                   >
-                    <TableCell style={{whiteSpace:"nowrap"}}>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
                       {row.joining_timestamp &&
                         format(
                           new Date(row.joining_timestamp),
                           "dd-MM-yyyy | HH:mm:ss"
                         )}
                     </TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.user_id}</TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
+                      {row.user_id}
+                    </TableCell>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
                       <a
-                        style={{ cursor: "pointer", textDecoration:"underline" }}
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                        }}
                         target="_blank"
                         rel="noreferrer"
                         href={`/user-management/user-list/user-profile?userId=${row.user_id}`}
@@ -210,11 +258,17 @@ export default function UserListTable({
                         {row.name}
                       </a>
                     </TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.referral_code}</TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.email}</TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.phone_number}</TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>
-                      { typeof(row.phone_verified) != "undefined" && (
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
+                      {row.referral_code}
+                    </TableCell>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
+                      {row.email}
+                    </TableCell>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
+                      {row.phone_number}
+                    </TableCell>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
+                      {typeof row.phone_verified != "undefined" && (
                         <Button
                           size="small"
                           style={{
@@ -223,25 +277,21 @@ export default function UserListTable({
                             backgroundColor:
                               row.phone_verified === true
                                 ? "#59A630"
-                                : 
-                                row.phone_verified === false
+                                : row.phone_verified === false
                                 ? "#F14E4E"
-                                : "orange"
-                              
+                                : "orange",
                           }}
                         >
-                          {
-                            row.phone_verified == true
+                          {row.phone_verified == true
                             ? "Verified"
-                            :  row.phone_verified == false
-                              ? "Not Verified"
-                              : ""
-                          }
+                            : row.phone_verified == false
+                            ? "Not Verified"
+                            : ""}
                         </Button>
                       )}
                     </TableCell>
 
-                    <TableCell style={{whiteSpace:"nowrap"}}>
+                    <TableCell style={{ whiteSpace: "nowrap" }}>
                       {row.account_status && (
                         <Button
                           size="small"
@@ -262,19 +312,81 @@ export default function UserListTable({
                         </Button>
                       )}
                     </TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.main_wallet_amount}</TableCell>
+                    {/* <TableCell style={{whiteSpace:"nowrap"}}>{row.main_wallet_amount}</TableCell>
                     <TableCell style={{whiteSpace:"nowrap"}}>{row.cashback_wallet_amount}</TableCell>
-                    <TableCell style={{whiteSpace:"nowrap"}}>{row.receive_money_wallet_amount}</TableCell>
+                    <TableCell style={{whiteSpace:"nowrap"}}>{row.receive_money_wallet_amount}</TableCell> */}
                     <TableCell>
-                      <Button size="small"
-                        onClick={() => router.push(`/user-management/user-logs?user_id=${row.user_id}`)}
+                      <Button
+                        size="small"
+                        onClick={() =>
+                          router.push(
+                            `/user-management/user-logs?user_id=${row.user_id}`
+                          )
+                        }
                         style={{
                           fontSize: 11,
                           width: "100%",
-                          backgroundColor:"orange"
-                        }} > 
+                          backgroundColor: "orange",
+                        }}
+                      >
                         View Logs
                       </Button>
+                    </TableCell>
+                    <TableCell>
+                    <Stack direction="row" spacing={2}>
+      {/* <Paper>
+        <MenuList>
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </MenuList>
+      </Paper> */}
+      <div>
+        <Button
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          options
+        </Button>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    <MenuItem onClick={handleClose}>Edit</MenuItem>
+                    <MenuItem onClick={handleClose}>Delete</MenuItem>
+                    <MenuItem onClick={handleClose}>Change roles</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
+    </Stack>
                     </TableCell>
                   </TableRow>
                 );

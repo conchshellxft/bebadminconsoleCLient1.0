@@ -1,7 +1,9 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import {
   Button,
+  MenuItem,
   Paper,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -119,7 +121,28 @@ const Filter = ({
             <TextField size="small" style={filterStyle} {...params} />
           )}
         />
+        
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={"disabled"}
+                      placeholder="Member Type"
+                      style={{ width: 280,height:40,...filterStyle }}
+                      onChange={(e) => {
+                        // let service_providers = data.service_providers;
+                        // item.status = e.target.value === "True" ? true : false;
+                        // setData({ ...data, service_providers });
+                      }}
+                    >
+                      <MenuItem value={"disabled"} disabled>Select Member Type</MenuItem>
+                      <MenuItem value={"Freelancer"}>Freelancer</MenuItem>
+                      <MenuItem value={"In-House"}>In-House</MenuItem>
+                      <MenuItem value={"Individual"}>Individual</MenuItem>
+
+                    </Select>
+                  {/* </div> */}
       </div>
+
       <div style={{ display: "flex", columnGap: 10, justifyContent: "center" }}>
         <TextField
           size="small"
@@ -150,6 +173,20 @@ const Filter = ({
           style={{ backgroundColor: "#EFEFEF", color: "black" }}
         >
           Reset
+        </Button>
+        <Button
+          onClick={() => {
+            setStartDate(null);
+            setEndDate(null);
+            setSearchQuery(null);
+            setUsersFilter("TOTAL_USERS");
+            setPage(0);
+          }}
+          size="small"
+          variant="contained"
+          style={{ backgroundColor: "#EFEFEF", color: "black" }}
+        >
+          Add
         </Button>
       </div>
     </div>
@@ -311,7 +348,119 @@ const UserList = () => {
                   setPage,
                   rowsPerPage,
                   setRowsPerPage,
-                  data: usersData?.data,
+                  data:  [
+                    {
+                      joining_timestamp: "2024-07-01 10:30:00",
+                      user_id: "U12345",
+                      name: "John Doe",
+                      referral_code: "REF2024",
+                      email: "john.doe@example.com",
+                      phone_number: "+1234567890",
+                      phone_verified: true,
+                      account_status: "Active",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-02 12:15:00",
+                      user_id: "U67890",
+                      name: "Jane Smith",
+                      referral_code: "REF2025",
+                      email: "jane.smith@example.com",
+                      phone_number: "+0987654321",
+                      phone_verified: false,
+                      account_status: "Pending",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-03 14:45:00",
+                      user_id: "U11223",
+                      name: "Alice Johnson",
+                      referral_code: "REF2026",
+                      email: "alice.johnson@example.com",
+                      phone_number: "+1122334455",
+                      phone_verified: true,
+                      account_status: "Active",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-04 09:00:00",
+                      user_id: "U44556",
+                      name: "Bob Brown",
+                      referral_code: "REF2027",
+                      email: "bob.brown@example.com",
+                      phone_number: "+6677889900",
+                      phone_verified: true,
+                      account_status: "Suspended",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-05 11:30:00",
+                      user_id: "U77889",
+                      name: "Charlie Davis",
+                      referral_code: "REF2028",
+                      email: "charlie.davis@example.com",
+                      phone_number: "+9988776655",
+                      phone_verified: false,
+                      account_status: "Pending",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-01 10:30:00",
+                      user_id: "U12345",
+                      name: "John Doe",
+                      referral_code: "REF2024",
+                      email: "john.doe@example.com",
+                      phone_number: "+1234567890",
+                      phone_verified: true,
+                      account_status: "Active",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-02 12:15:00",
+                      user_id: "U67890",
+                      name: "Jane Smith",
+                      referral_code: "REF2025",
+                      email: "jane.smith@example.com",
+                      phone_number: "+0987654321",
+                      phone_verified: false,
+                      account_status: "Pending",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-03 14:45:00",
+                      user_id: "U11223",
+                      name: "Alice Johnson",
+                      referral_code: "REF2026",
+                      email: "alice.johnson@example.com",
+                      phone_number: "+1122334455",
+                      phone_verified: true,
+                      account_status: "Active",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-04 09:00:00",
+                      user_id: "U44556",
+                      name: "Bob Brown",
+                      referral_code: "REF2027",
+                      email: "bob.brown@example.com",
+                      phone_number: "+6677889900",
+                      phone_verified: true,
+                      account_status: "Suspended",
+                      view_logs: "View"
+                    },
+                    {
+                      joining_timestamp: "2024-07-05 11:30:00",
+                      user_id: "U77889",
+                      name: "Charlie Davis",
+                      referral_code: "REF2028",
+                      email: "charlie.davis@example.com",
+                      phone_number: "+9988776655",
+                      phone_verified: false,
+                      account_status: "Pending",
+                      view_logs: "View"
+                    }
+                  ]
+                  ,
                   total: usersData?.total_matched,
                   order,
                   setOrder,

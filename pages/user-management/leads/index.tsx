@@ -1,7 +1,9 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import {
   Button,
+  MenuItem,
   Paper,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -120,6 +122,35 @@ const Filter = ({
           )}
         />
       </div>
+      <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      marginBottom: 20,
+                      marginTop: 30,
+                    }}
+                  >
+                    <Typography>Status: </Typography>
+                    &nbsp;&nbsp;&nbsp;
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      // value={}
+                      label="Age"
+                      style={{ width: 280 }}
+                      onChange={(e) => {
+                        // let service_providers = data.service_providers;
+                        // item.status = e.target.value === "True" ? true : false;
+                        // setData({ ...data, service_providers });
+                      }}
+                    >
+                      <MenuItem value={"Freelancer"}>Freelancer</MenuItem>
+                      <MenuItem value={"In-House"}>In-House</MenuItem>
+                      <MenuItem value={"Individual"}>Individual</MenuItem>
+
+                    </Select>
+                  </div>
       <div style={{ display: "flex", columnGap: 10, justifyContent: "center" }}>
         <TextField
           size="small"
