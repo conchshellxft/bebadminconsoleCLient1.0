@@ -174,6 +174,24 @@ const Filter = ({
         >
           Reset
         </Button>
+        
+      </div>
+      <div style={{ display: "flex", columnGap: 20, flexDirection:"row" }}>
+      {/* <div style={{width:"67%" }}/> */}
+      <Button
+          onClick={() => {
+            setStartDate(null);
+            setEndDate(null);
+            setSearchQuery(null);
+            setUsersFilter("TOTAL_USERS");
+            setPage(0);
+          }}
+          size="small"
+          variant="contained"
+          style={{ backgroundColor: "green", color: "white" }}
+        >
+          Add
+        </Button>
         <Button
           onClick={() => {
             setStartDate(null);
@@ -184,11 +202,12 @@ const Filter = ({
           }}
           size="small"
           variant="contained"
-          style={{ backgroundColor: "#EFEFEF", color: "black" }}
+          style={{ backgroundColor: "red", color: "white" }}
         >
-          Add
+          Delete
         </Button>
       </div>
+      
     </div>
   );
 };
